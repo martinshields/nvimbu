@@ -6,7 +6,7 @@ vim.api.nvim_exec(
 	false
 )
 
--- highlight yank
+-- highlight yank color
 vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
 	pattern = "*",
