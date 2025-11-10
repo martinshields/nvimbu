@@ -56,6 +56,10 @@ keymap.set("n", "<leader>bo", "<CMD>BufferLineCloseOthers<CR>", { desc = "close 
 keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", { desc = "next buffer" })
 keymap.set("n", "<c-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "previous buffer" }) -- previous tab
 
+-- copy file path
+vim.keymap.set("n", "<leader>yp", ":let @+=expand('%:.')<cr>", { desc = "Copy relative path" })
+vim.keymap.set("n", "<leader>yP", ":let @+=@%<cr>", { desc = "Copy absolute path" })
+
 -- -- Diff keymaps
 -- keymap.set("n", "<leader>cc", ":diffput<CR>") -- put diff from current to other during diff
 -- keymap.set("n", "<leader>cj", ":diffget 1<CR>") -- get diff from left (local) during merge
