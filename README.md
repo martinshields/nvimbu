@@ -1,18 +1,13 @@
-# nvimbu - Neovim backup directory
 
-
-cd ~/nvimbu
-
-cat > README.md << 'EOF'
 # nvimbu — Neovim Config Backup
 
-This repository contains a **full backup** of your Neovim configuration (`~/.config/nvim`).
+This repository contains a **full backup** of my Neovim configuration (`~/.config/nvim`).
 
 ---
 
 ## Restore Neovim Config
 
-To restore your Neovim setup from this backup:
+To restore the Neovim setup from this backup:
 
 ```bash
 # Backup current config (just in case)
