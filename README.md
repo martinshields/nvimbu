@@ -1,0 +1,1 @@
+# nvimbu - Neovim backup directory
