@@ -1,20 +1,27 @@
+# My Neovim Config Backup (nvimbu)
 
-# nvimbu — Neovim Config Backup
+This folder contains my full, working Neovim configuration (lazy.nvim-based, Lua config).
 
-This repository contains a **full backup** of my Neovim configuration (`~/.config/nvim`).
+## How to Restore / Overwrite Current Neovim Config
 
----
+**Warning: This will completely replace your current `~/.config/nvim` (Linux/macOS) or `%LOCALAPPDATA%\nvim` (Windows)**  
+We make a backup first just in case.
 
-## Restore Neovim Config
+### Linux / macOS / WSL / Git Bash
 
-To restore the Neovim setup from this backup:
+From the directory containing the `nvimbu/` folder:
 
 ```bash
-# Backup current config (just in case)
-mv ~/.config/nvim ~/.config/nvim.backup.$(date +%s)
+# Backup current config (safety first)
+rm -rf ~/.config/nvim.bak 2>/dev/null
+mv ~/.config/nvim ~/.config/nvim.bak 2>/dev/null || echo "No existing config to backup"
 
-# Restore from this repo
-cp -r ~/nvimbu ~/.config/nvim
+# Overwrite with this backup
+rm -rf ~/.config/nvim
+cp -r nvimbu/nvim ~/.config/nvim
 
-# Or if you want to be selective (recommended):
-rsync -a ~/nvimbu/ ~/.config/nvim/
+# Done! Open Neovim and let lazy.nvim install/update plugins
+
+One-liner (if you're brave – Linux/macOS only. NO BACKUPS.)
+
+rm -rf ~/.config/nvim ~/.config/nvim.bak && cp -r nvimbu/nvim ~/.config/nvim && nvim
