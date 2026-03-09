@@ -9,7 +9,7 @@ local keymap = vim.keymap
 keymap.set("n", "<leader>wq", ":wq<CR>", { desc = "Save and Quit" }) -- save and quit
 keymap.set("n", "<leader>ww", ":w<CR>", { desc = "Write/Save File" }) -- save
 keymap.set("n", "gx", ":!open <c-r><c-a><CR>", { desc = "Open URL under cursor" }) -- open URL under cursor
-keymap.set("n", "C-s", ":w<CR>", { desc = "Save file" })
+keymap.set("n", "<C-s>", ":w<CR>", { desc = "Save file" })
 vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
 vim.keymap.set("n", "<leader>ul", "<CMD>Lazy<CR>", { desc = "Open Lazy" })
 vim.keymap.set("n", "<leader>um", "<CMD>Mason<CR>", { desc = "Open Mason" })
@@ -24,7 +24,14 @@ vim.keymap.set("n", "<leader>p", "<CMD>Telescope yank_history<CR>", { desc = "Ya
 keymap.set({ "n", "v" }, "H", "_^", { desc = "Move to the beginning of the line" })
 keymap.set({ "n", "v" }, "L", "$", { desc = "Move to the end of the line" })
 --copy line then comment it step_out
-vim.keymap.set("n", "ycc", "yygccp", { remap = true })
+vim.keymap.set("n", "<leader>yc", function()
+	local line = vim.api.nvim_get_current_line()
+	local row = vim.api.nvim_win_get_cursor(0)[1]
+	local keys = vim.api.nvim_replace_termcodes("gcc", true, false, true)
+	vim.api.nvim_feedkeys(keys, "x", false)
+	vim.api.nvim_buf_set_lines(0, row, row, false, { line })
+end, { desc = "Copy line, comment original, paste below", nowait = true })
+
 -- Vertical scroll and center
 vim.keymap.set("n", "<C-d>", "<C-d>zz")
 vim.keymap.set("n", "<C-u>", "<C-u>zz")
@@ -54,7 +61,7 @@ keymap.set("n", "<leader>bd", "<cmd>bdelete<CR>", { silent = true, desc = "Close
 keymap.set("n", "<leader>bx", "<CMD>BufferLinePickClose<CR>", { desc = "Pick buffer to close" }) -- close a tab
 keymap.set("n", "<leader>bo", "<CMD>BufferLineCloseOthers<CR>", { desc = "close all others" }) -- close a tab
 keymap.set("n", "<Tab>", "<Cmd>BufferLineCycleNext<CR>", { desc = "next buffer" })
-keymap.set("n", "<c-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "previous buffer" }) -- previous tab
+keymap.set("n", "<S-Tab>", "<Cmd>BufferLineCyclePrev<CR>", { desc = "previous buffer" })
 
 -- copy file path
 vim.keymap.set("n", "<leader>yp", ":let @+=expand('%:.')<cr>", { desc = "Copy relative path" })
@@ -202,7 +209,8 @@ keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>", { desc = "
 -- keymaps for moving line up/down
 local opts = { noremap = true, silent = true }
 
--- move line commandskeymap.set("n", "<leader>q", "<cmd>q<CR>", { silent = true, desc = "Close buffer" })
+-- move line commands
+keymap.set("n", "<leader>q", "<cmd>q<CR>", { silent = true, desc = "Close buffer" })
 -- Normal-mode commands
 vim.keymap.set("n", "<A-j>", ":MoveLine(1)<CR>", opts)
 vim.keymap.set("n", "<A-k>", ":MoveLine(-1)<CR>", opts)

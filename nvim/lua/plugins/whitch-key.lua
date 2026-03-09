@@ -23,6 +23,8 @@ return {
 			{ "<leader>2", group = "+harpoon 2" },
 			{ "<leader>3", group = "+harpoon 3" },
 			{ "<leader>4", group = "+harpoon 4" },
+			{ "<leader>y", group = "+yank" },
+			{ "<leader>yc", desc = "Copy line, comment original" },
 		})
 	end,
 }
