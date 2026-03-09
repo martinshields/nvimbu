@@ -107,20 +107,21 @@
 --   end
 -- }
 
--- Tokyo Night Theme
+-- Omarchy theme integration: loads colorscheme from the active omarchy theme
+local theme_neovim = vim.fn.expand("~/.config/omarchy/current/theme/neovim.lua")
+if vim.fn.filereadable(theme_neovim) == 1 then
+	return dofile(theme_neovim)
+end
+
+-- Fallback if no omarchy theme is set
 return {
-	-- https://github.com/folke/tokyonight.nvim
-	"folke/tokyonight.nvim", -- You can replace this with your favorite colorscheme
-	lazy = false, -- We want the colorscheme to load immediately when starting Neovim
-	priority = 1000, -- Load the colorscheme before other non-lazy-loaded plugins
-	opts = {
-		-- Replace this with your scheme-specific settings or remove to use the defaults
-		-- transparent = true,
-		style = "night", -- other variations "storm, night, moon, day"
-	},
+	"folke/tokyonight.nvim",
+	lazy = false,
+	priority = 1000,
+	opts = { style = "night" },
 	config = function(_, opts)
-		require("tokyonight").setup(opts) -- Replace this with your favorite colorscheme
-		vim.cmd("colorscheme tokyonight") -- Replace this with your favorite colorscheme
+		require("tokyonight").setup(opts)
+		vim.cmd("colorscheme tokyonight")
 	end,
 }
 
