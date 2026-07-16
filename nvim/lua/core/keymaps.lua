@@ -196,8 +196,8 @@ keymap.set("i", "<C-Space>", "<cmd>lua vim.lsp.buf.completion()<CR>", { desc = "
 -- end)
 
 --
---presistences
 -- restore the session for the current directory
+--presistences
 -- vim.api.nvim_set_keymap("n", "<leader>qs", [[<cmd>lua require("persistence").load()<cr>]], {})
 
 -- restore the last session
