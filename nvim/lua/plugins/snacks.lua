@@ -116,7 +116,7 @@ return {
 		explorer = { enabled = false },
 		indent = { enabled = true },
 		input = { enabled = false },
-		picker = { enabled = false },
+		picker = { enabled = true },
 		notifier = { enabled = false },
 		quickfile = { enabled = true },
 		scope = { enabled = false },

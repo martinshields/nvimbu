@@ -19,7 +19,7 @@ vim.keymap.set("n", "<leader>ud", function()
 end, { desc = "Open Snacks Menu" })
 
 vim.keymap.set("n", "<leader>n", "<CMD>NoiceAll<CR>", { desc = "NoiceAll" })
-vim.keymap.set("n", "<leader>p", "<CMD>Telescope yank_history<CR>", { desc = "Yank history" })
+vim.keymap.set("n", "<leader>p", "<CMD>YankyRingHistory<CR>", { desc = "Yank history" })
 -- Go to Beginning or End of line
 keymap.set({ "n", "v" }, "H", "_^", { desc = "Move to the beginning of the line" })
 keymap.set({ "n", "v" }, "L", "$", { desc = "Move to the end of the line" })
@@ -85,32 +85,20 @@ keymap.set("n", "<leader>ee", ":NvimTreeToggle<CR>") -- toggle file explorer
 keymap.set("n", "<leader>er", ":NvimTreeFocus<CR>") -- toggle focus to file explorer
 keymap.set("n", "<leader>ef", ":NvimTreeFindFile<CR>") -- find file in file explorer
 
--- Telescope
-vim.api.nvim_set_keymap(
-	"n",
-	"<Leader>fc",
-	-- "<cmd>lua require('telescope.builtin').find_files({prompt_title='Plugins', cwd='~/.config/mvim/'})<CR>",
-	"<CMD>:lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})<CR>",
-	{ noremap = true, silent = true, desc = "find configs" }
-)
-keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "Find File" })
-keymap.set("n", "<leader>fg", require("telescope.builtin").live_grep, { desc = "Live grep" })
-keymap.set("n", "<leader>fb", require("telescope.builtin").buffers, { desc = "Find buffers" })
-keymap.set("n", "<leader>fh", require("telescope.builtin").help_tags, { desc = "Find help" })
-
-keymap.set(
-	"n",
-	"<leader>fs",
-	require("telescope.builtin").current_buffer_fuzzy_find,
-	{ desc = "current buffer fuz find" }
-)
-keymap.set("n", "<leader>fo", require("telescope.builtin").lsp_document_symbols, { desc = "lsp doc symbol" })
-keymap.set("n", "<leader>fi", require("telescope.builtin").lsp_incoming_calls, { desc = "lsp_incoming_calls" })
-vim.keymap.set("n", "<leader>fr", "<CMD>Telescope oldfiles<CR>", { desc = "open recent files" })
-vim.keymap.set("n", "<leader>fk", "<CMD>Telescope keymaps<CR>", { desc = "Find keymaps" })
-keymap.set("n", "<leader>fm", function()
-	require("telescope.builtin").treesitter({ default_text = ":method:" })
-end)
+-- Snacks picker
+keymap.set("n", "<Leader>fc", function()
+	Snacks.picker.files({ cwd = vim.fn.stdpath("config") })
+end, { desc = "find configs" })
+keymap.set("n", "<leader>ff", function() Snacks.picker.files() end, { desc = "Find File" })
+keymap.set("n", "<leader>fg", function() Snacks.picker.grep() end, { desc = "Live grep" })
+keymap.set("n", "<leader>fb", function() Snacks.picker.buffers() end, { desc = "Find buffers" })
+keymap.set("n", "<leader>fh", function() Snacks.picker.help() end, { desc = "Find help" })
+keymap.set("n", "<leader>fs", function() Snacks.picker.lines() end, { desc = "current buffer fuz find" })
+keymap.set("n", "<leader>fo", function() Snacks.picker.lsp_symbols() end, { desc = "lsp doc symbol" })
+keymap.set("n", "<leader>fi", function() Snacks.picker.lsp_incoming_calls() end, { desc = "lsp_incoming_calls" })
+keymap.set("n", "<leader>fr", function() Snacks.picker.recent() end, { desc = "open recent files" })
+keymap.set("n", "<leader>fk", function() Snacks.picker.keymaps() end, { desc = "Find keymaps" })
+keymap.set("n", "<leader>fm", function() Snacks.picker.treesitter() end, { desc = "treesitter symbols" })
 
 -- Git-blame
 keymap.set("n", "<leader>gb", ":GitBlameToggle<CR>") -- toggle git blame
