@@ -108,9 +108,9 @@
 -- }
 
 -- Omarchy theme integration: loads colorscheme from the active omarchy theme
-local theme_neovim = vim.fn.expand("~/.config/omarchy/current/theme/neovim.lua")
-if vim.fn.filereadable(theme_neovim) == 1 then
-	return dofile(theme_neovim)
+local omarchy_spec = require("core.omarchy_theme").spec()
+if omarchy_spec then
+	return omarchy_spec
 end
 
 -- Fallback if no omarchy theme is set
